@@ -150,15 +150,39 @@ class Torneio():
                                 tem = 1
                                 return None
                             break
-                idade = input('Qual é a idade do lutador?')
-                idade = int(idade)
-                lutador['Idade'] = idade
-                peso = input('Qual é o peso do lutador?')
-                peso = float(peso)
-                lutador['Peso'] = peso
-                forca = input('Qual é a força deste lutador?')
-                forca = int(forca)
-                lutador['Força'] = forca
+                while True:
+                    idade = input('Qual é a idade do lutador?')
+                    try:
+                        idade = int(idade)
+                    except KeyboardInterrupt:
+                        break
+                    except:
+                        print('Idade inválida. Idade deve ser um numero inteiro')
+                    else:
+                        lutador['Idade'] = idade
+                        break
+                while True:
+                    peso = input('Qual é o peso do lutador?')
+                    try:
+                        peso = float(peso)
+                    except KeyboardInterrupt:
+                        break
+                    except:
+                        print('Peso inválido. Peso deve ser um número')
+                    else:
+                        lutador['Peso'] = peso
+                        break
+                while True:
+                    forca = input('Qual é a força deste lutador?')
+                    try:
+                    forca = int(forca)
+                    except KeyboardInterrupt:
+                        break
+                    except:
+                        print('Força inválida. Força deve ser um numero inteiro')
+                    else:
+                    lutador['Força'] = forca
+                    break
 
                 luta = input('Qual é a arte marcial do lutador?')
                 luta.lower()
