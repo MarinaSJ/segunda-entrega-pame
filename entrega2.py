@@ -113,6 +113,7 @@ class Torneio():
                     continue
                 else:
                     peso.append(pesom)
+                    break
             while True:
                 pesoM = input('Adicione o maior peso de uma categoria de peso: ')
                 try:
@@ -124,6 +125,7 @@ class Torneio():
                     continue
                 else:
                     peso.append(pesoM)
+                    break
             pesos.append(peso)
             quer = input('Há outra categoria de peso?(s/n) ')
             quer.lower()
@@ -166,6 +168,7 @@ class Torneio():
                         break
                     except:
                         print('Idade inválida. Idade deve ser um numero inteiro')
+                        continue
                     else:
                         lutador['Idade'] = idade
                         break
@@ -177,6 +180,7 @@ class Torneio():
                         break
                     except:
                         print('Peso inválido. Peso deve ser um número')
+                        continue
                     else:
                         lutador['Peso'] = peso
                         break
@@ -188,6 +192,7 @@ class Torneio():
                         break
                     except:
                         print('Força inválida. Força deve ser um numero inteiro')
+                        continue
                     else:
                         lutador['Força'] = forca
                     break
