@@ -67,7 +67,6 @@ class Torneio():
 
     def setCriar_torneio(self):
         torneio = {}
-        
         tem = 0
         while tem>=0 and tem <=1:
             tem = 0
@@ -179,26 +178,32 @@ class Torneio():
                 print (torneio['Nome'])
 
     def setVer_ranking(self,torneio):
-        participantes=[]
-        for lutador in self.lutadores:
-            if lutador['Torneio'] == torneio:
-                participante = [lutador['Nome'],lutador['Pontos']]
-                participantes.append(participante)
-        if bool(participantes)==False:
-            print('Não há participantes neste torneio ou o torneio não existe')
+        torneio.lower()
+        e=0
+        for t in self.torneios:
+            if t['Nome'] == torneio:
+                e +=1
+        if  e!=0:
+            participantes=[]
+            for lutador in self.lutadores:
+                if lutador['Torneio'] == torneio:
+                    participante = [lutador['Nome'],lutador['Pontos']]
+                    participantes.append(participante)
+            if bool(participantes)==False:
+                print('Não há participantes neste torneio ou o torneio não existe')
+            else:
+                pos = 0
+                while pos<(range(participantes)-1):
+                    if participantes[pos][1]<participantes[pos+1][1]:
+                        menor = participantes[pos]
+                        maior = participantes[pos+1]
+                        participantes[pos] = maior
+                        participantes[pos+1] = menor
+                p = 1
+                while p<=range(participantes):
+                    print(f'O participante {participantes[p-1][0]} ficou na {p} colocação com {participantes[p-1][1]} pontos')
         else:
-            pos = 0
-            while pos<(range(participantes)-1):
-                if participantes[pos][1]<participantes[pos+1][1]:
-                    menor = participantes[pos]
-                    maior = participantes[pos+1]
-                    participantes[pos] = maior
-                    participantes[pos+1] = menor
-            p = 1
-            while p<=range(participantes):
-                print(f'O participante {participantes[p-1][0]} ficou na {p} colocação com {participantes[p-1][1]} pontos')
-
-
+            print('Torneio inexistente')
 
     def setVer_lutadores(self, torneio):
         torneio.lower()
@@ -219,8 +224,12 @@ class Torneio():
 
     def setRealizar_luta(self,torneio,lutador1,lutador2):
         torneio.lower()
-        if torneio not in self.torneio:
-            print('torneio inexistente')
+        e = 0
+        for t in self.torneios:
+            if t['Nome'] == torneio:
+                e +=1
+        if  e == 0:
+            print('Torneio inexistente')
         else:
             tem1=0
             tem2=0
