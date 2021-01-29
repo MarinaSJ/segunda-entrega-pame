@@ -211,7 +211,8 @@ class Torneio():
 
     def setVer_ranking(self,torneio):
         if bool(self.torneios) == False:
-            return print('Não há torneios inscritos')
+            print('Não há torneios inscritos')
+            return None
         torneio.lower()
         e=0
         for t in self.torneios:
