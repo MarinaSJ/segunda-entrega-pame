@@ -289,6 +289,9 @@ class Torneio():
             if tem2==0:
                 print('O segundo lutador não está inscrito neste torneio')
             else:
+                if lutador1['Faixa'] != lutador2['Faixa']:
+                    print('Faixas diferentes nao podem competir')
+                    return None
                 if lutador1['Força']>lutador2['Força']:
                     print(f"O lutador {lutador1['Nome']} venceu")
                     lutador1['Pontos'] += 1
