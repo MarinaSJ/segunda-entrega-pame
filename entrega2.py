@@ -210,6 +210,8 @@ class Torneio():
                 print (torneio['Nome'])
 
     def setVer_ranking(self,torneio):
+        if bool(self.torneios) == False:
+            return print('Não há torneios inscritos')
         torneio.lower()
         e=0
         for t in self.torneios:
@@ -239,6 +241,8 @@ class Torneio():
 
     def setVer_lutadores(self, torneio):
         torneio.lower()
+        if bool(self.torneios) == False:
+            return print('Não há torneios inscritos')
         s = 0
         for t in self.torneios:
             if t['Nome'] == torneio:
@@ -256,6 +260,8 @@ class Torneio():
 
     def setRealizar_luta(self,torneio,lutador1,lutador2):
         torneio.lower()
+        if bool(self.torneios) == False:
+            return print('Não há torneios inscritos')
         e = 0
         for t in self.torneios:
             if t['Nome'] == torneio:
