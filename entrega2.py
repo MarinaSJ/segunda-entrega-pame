@@ -17,27 +17,32 @@ class Torneio():
         if self.fazer == '3':
             setVer_torneio()
         if self.fazer == '4':
-            self.nome_torneio = input('Qual torneio que deseja ver?')
-            setVer_ranking(self.nome_torneio)
+            nome_torneio = input('De qual torneio que deseja ver?')
+            setVer_ranking(nome_torneio)
         if self.fazer == '5':
-            self.nome_torneio = input('Qual torneio que deseja ver?')
-            setVer_lutadores(self.nome_torneio)
+            nome_torneio = input('De qual torneio que deseja ver?')
+            setVer_lutadores(nome_torneio)
         if self.fazer == '6':
-            self.nome_torneio = input('Qual torneio que deseja ver?')
+            nome_torneio = input('Qual torneio que deseja ver?')
             lutador1, lutador2 = input('Qual é o nome de um dos lutadores?')\
             , input('Qual o nome do outro lutador?')
-            setRealizar_luta(self.nome_torneio, lutador1, lutador2)
+            setRealizar_luta(nome_torneio, lutador1, lutador2)
         else:
             print('Opção inválida')    
 
     def setCriar_torneio(self):
         torneio = {}
-        torneio['Nome'] = input('Qual o nome do torneio?')
-        torneio['Arte marcial'] = input('Qual arte marcial?')
+        nome = input('Qual o nome do torneio?')
+        nome.lower()
+        torneio['Nome'] = nome
+        luta = input('Qual arte marcial?')
+        luta.lower()
+        torneio['Arte marcial'] = luta
         faixas = []
         quer = 'sim'
         while quer == 'sim' or quer == 's':
-            faixa = input('Adicione o a cor de uma faixa: ')
+            faixa = input('Adicione o a cor de uma faixa:(caso haja a \n \
+                opção faixa livre favor escrever "sem" como uma das faixas) ')
             faixa.lower()
             faixas.append(faixa)
             quer = input('Há outra faixa?(s/n) ')
@@ -46,27 +51,113 @@ class Torneio():
         pesos = []
         quer = 'sim'
         while quer == 'sim' or quer == 's':
-            peso = input('Adicione o a cor de uma categoria de peso: ')
-            peso.lower()
-            pesos.append(peso)
+            peso = []
+            pesom = input('Adicione o menor peso de uma categoria de peso: ')
+            try:
+                pesom = float(pesom)
+            except:
+                print('peso inválido')
+            else:
+                peso.append(pesom)
+                pesoM = input('Adicione o maior peso de uma categoria de peso: ')
+            try:
+                pesoM = float(pesoM)
+            except:
+                print('peso inválido')
+            else:
+                peso.append(pesoM)
+                pesos.append(peso)
             quer = input('Há outra categoria de peso?(s/n) ')
             quer.lower()
         torneio['Pesos'] = pesos
+        self.torneios.append(torneio)
         
     def setInscrever_lutador(self):
-        pass
+        lutador = {}
+        torneio = input('De qual torneio o lutador deseja participar?')
+        torneio.lower()
+        torneios = setVer_torneio()
+        if  torneio in torneios:
+            lutador['Torneio'] = torneio
+            faixa = input('qual é a faixa do lutador?(escrever "sem" caso não tenha)')
+            faixa.lower()
+            lutador['Faixa'] = faixa
+            faixas = setFaixas(torneio)
+            if faixas != None and faixa in faixas:
+                nome = input('Qual o nome do lutador?')
+                nome.lower()
+                lutador['Nome'] = nome
+                idade = input('Qual é a idade do lutador?')
+                idade = int(idade)
+                lutador['Idade'] = idade
+                peso = input('Qual é o peso do lutador?')
+                peso = float(peso)
+                lutador['Peso'] = peso
+                forca = input('Qual é a força deste lutador?')
+                forca = int(forca)
+                lutador['Força'] = forca
+
+                luta = input('Qual é a arte marcial do lutador?')
+                luta.lower()
+                lutador['Arte marcial'] = luta
+                self.lutadores.append(lutador)
+            else:
+                print('Faixa não aceita pelo torneio')
+        else:
+            print('Torneio inexistente')
 
     def setVer_torneio(self):
-        pass
+        for torneio in self.torneios:
+            print torneio['Nome']
 
     def setVer_ranking(self,torneio):
         pass
 
-    def setVer_lutadores(self):
-        pass
+    def setVer_lutadores(self, torneio):
+    torneio.lower()
+    pessoas = 0
+    for lutador in self.lutadores:
+        if lutador['Torneio'] == torneio:
+            print lutador['Nome']
+            pessoas+=1
+    if pessoas<=0:
+        print('Não há lutadores inscritos neste torneio')
 
     def setRealizar_luta(self,torneio,lutador1,lutador2):
-        pass
+        torneio.lower()
+        if torneio not in self.torneio:
+            print('torneio inexistente')
+        else:
+            tem1=0
+            tem2=0
+            for lutador in self.lutadores:
+                if lutador['Nome'] == lutador1:
+                    lutador1 = lutador
+                    tem1 = 1
+                elif lutador['Nome'] == lutador2:
+                    lutador2 = lutador
+                    tem2 = 1
+            if tem1==0:
+                print('O primeiro lutador não está inscrito neste torneio')
+            if tem2==0:
+                print('O segundo lutador não está inscrito neste torneio')
+            else:
+                if lutador1['Força']>lutador2['Força']:
+                    print(f'O lutador {lutador1['Nome']} venceu')
+                if lutador1['Força']<lutador2['Força']:
+                    print(f'O lutador {lutador2['Nome']} venceu')
+                else:
+                    #Empate, deixar aleatoriedade decidir usando random
+                    pass
+
+
+    def setFaixas(self,torneio):
+        faixas = None
+        for t in self.torneios:
+            if t['Nome'] == torneio:
+                faixas = t['Faixas']
+        return faixas
+
 
 
 objeto = Torneio()
