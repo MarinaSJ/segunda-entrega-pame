@@ -99,26 +99,34 @@ class Torneio():
             quer.lower()
         torneio['Faixas'] = faixas
         pesos = []
-        quer = 'sim'
-        while quer == 'sim' or quer == 's':
-            peso = []
-            pesom = input('Adicione o menor peso de uma categoria de peso: ')
-            try:
-                pesom = float(pesom)
-            except:
-                print('peso inválido')
-            else:
-                peso.append(pesom)
+        peso = []
+        quer = 's'
+        while quer =='s':
+            while True:
+                pesom = input('Adicione o menor peso de uma categoria de peso: ')
+                try:
+                    pesom = float(pesom)
+                except KeyboardInterrupt:
+                    break
+                except:
+                    print('Peso inválido. Peso deve ser um numero')
+                    continue
+                else:
+                    peso.append(pesom)
+            while True:
                 pesoM = input('Adicione o maior peso de uma categoria de peso: ')
-            try:
-                pesoM = float(pesoM)
-            except:
-                print('peso inválido')
-            else:
-                peso.append(pesoM)
-                pesos.append(peso)
-            quer = input('Há outra categoria de peso?(s/n) ')
-            quer.lower()
+                try:
+                    pesoM = float(pesoM)
+                except KeyboardInterrupt:
+                    break
+                except:
+                    print('Peso inválido. Peso deve ser um numero')
+                    continue
+                else:
+                    peso.append(pesoM)
+            pesos.append(peso)
+                quer = input('Há outra categoria de peso?(s/n) ')
+                quer.lower()
         torneio['Pesos'] = pesos
         self.torneios.append(torneio)
         
