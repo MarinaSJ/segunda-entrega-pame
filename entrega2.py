@@ -125,8 +125,8 @@ class Torneio():
                 else:
                     peso.append(pesoM)
             pesos.append(peso)
-                quer = input('Há outra categoria de peso?(s/n) ')
-                quer.lower()
+            quer = input('Há outra categoria de peso?(s/n) ')
+            quer.lower()
         torneio['Pesos'] = pesos
         self.torneios.append(torneio)
         
@@ -183,13 +183,13 @@ class Torneio():
                 while True:
                     forca = input('Qual é a força deste lutador?')
                     try:
-                    forca = int(forca)
+                        forca = int(forca)
                     except KeyboardInterrupt:
                         break
                     except:
                         print('Força inválida. Força deve ser um numero inteiro')
                     else:
-                    lutador['Força'] = forca
+                        lutador['Força'] = forca
                     break
 
                 luta = input('Qual é a arte marcial do lutador?')
